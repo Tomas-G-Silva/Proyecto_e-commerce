@@ -14,24 +14,46 @@ class Productos{
     }
 }
 //Espumantes
-const espumante1 = new Productos("Deseado Rose", "Espumante rojo cereza muy atractivo, brillante y de finas burbujas", "1600", "Espumantes");
+const espumante1 = new Productos("Deseado Rose", "Espumante rojo cereza muy atractivo, brillante y de finas burbujas", "$1600", "Espumantes");
 ArrayProductos.push(espumante1);
 
-const espumante2 = new Productos("Navarro Correas Extra Brut", "De color amarillo pálido verdoso. Aromas frescos afrutados y florales", "2500", "Espumantes");
+const espumante2 = new Productos("Navarro Correas Extra Brut", "De color amarillo pálido verdoso. Aromas frescos afrutados y florales", "$2500", "Espumantes");
 ArrayProductos.push(espumante2);
 
-const espumante3 = new Productos("Federico de Alvear", "Límpido, de color verde muy tenue, con un perlage persistente de gran calidad", "1100", "Espumantes");
+const espumante3 = new Productos("Federico de Alvear", "Límpido, de color verde muy tenue, con un perlage persistente de gran calidad", "$1100", "Espumantes");
 ArrayProductos.push(espumante3);
 
 //Vodkas
-const vodkas1 = new Productos("Absolute 750ml", "Suave y maduro con el carácter distintivo del grano de trigo, seguido de un toque a frutas secas", "3800", "Vodkas");
+const vodkas1 = new Productos("Absolute 750ml", "Suave y maduro con el carácter distintivo del grano de trigo, seguido de un toque a frutas secas", "$3800", "Vodkas");
 ArrayProductos.push(vodkas1);
 
-const vodkas2 = new Productos("Smirnoff 750ml", "Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta", "2500", "Vodkas");
+const vodkas2 = new Productos("Smirnoff 750ml", "Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta", "$2500", "Vodkas");
 ArrayProductos.push(vodkas2);
 
-//AGREGAR TODOS LOS PRODUCTOS
+const vodkas3 = new Productos("Sky 750ml", "Presenta un aspecto muy brillante, límpido y cristalino con un un sabor suave de leve amargor", "$2450", "Vodkas");
+ArrayProductos.push(vodkas3);
 
+//Rones
+const rones1 = new Productos("Bacardi Blanco", "Ron ligero y aromáticamente equilibrado", "$3200", "Rones");
+ArrayProductos.push(rones1);
+
+const rones2 = new Productos("Bacardi Dorado", "Es el primer ron dorado ligero del mundo. Se envejece en barricas de roble blanco tostado al fuego para darle carácter", "$3350", "Rones");
+ArrayProductos.push(rones2);
+
+const rones3 = new Productos("Havana Club", "Es considerado la transición entre los Rones Blancos y los Oscuros", "$2100", "Rones");
+ArrayProductos.push(rones3);
+
+
+//FILTROS
+ const mostrarProductosCategoria = (categoria) =>{
+    const filtrado = ArrayProductos.filter((el)=> el.categoria == categoria);
+    let mensaje = "";
+    
+    filtrado.forEach((el)=> {
+     mensaje += "\nProdcuto: " + el.nombre + "\nDescripción: " + el.descripcion + "\nPrecio: " + el.precio
+    })
+    alert(mensaje)
+ }
 
 
 
@@ -41,11 +63,11 @@ const elegirProductos = () => {
     menu = parseInt(prompt(" Selecciona una opción: \n 1-Espumantes \n 2-Vodkas \n 3-Rones \n 4-Volver al menu principal"));
     while (menu !== SALIR) {
         switch (menu) {
-            case 1: mostrarEspumantes();
+            case 1: mostrarProductosCategoria("Espumantes");
                 break;
-            case 2: mostrarVodkas();
+            case 2: mostrarProductosCategoria("Vodkas");
                 break;
-            case 3: mostrarRones();
+            case 3: mostrarProductosCategoria("Rones");
                 break;
             default:
                 alert("Ingreso una opcion invalida");
