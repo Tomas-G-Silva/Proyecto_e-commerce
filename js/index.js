@@ -1,6 +1,39 @@
 
 //DECLARACIONES ---- 
 const SALIR = 4;
+const ArrayProductos = [];
+
+
+//OBEJTOS
+class Productos{
+    constructor(nombre, descripcion, precio, categoria){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.categoria = categoria;
+    }
+}
+//Espumantes
+const espumante1 = new Productos("Deseado Rose", "Espumante rojo cereza muy atractivo, brillante y de finas burbujas", "1600", "Espumantes");
+ArrayProductos.push(espumante1);
+
+const espumante2 = new Productos("Navarro Correas Extra Brut", "De color amarillo pálido verdoso. Aromas frescos afrutados y florales", "2500", "Espumantes");
+ArrayProductos.push(espumante2);
+
+const espumante3 = new Productos("Federico de Alvear", "Límpido, de color verde muy tenue, con un perlage persistente de gran calidad", "1100", "Espumantes");
+ArrayProductos.push(espumante3);
+
+//Vodkas
+const vodkas1 = new Productos("Absolute 750ml", "Suave y maduro con el carácter distintivo del grano de trigo, seguido de un toque a frutas secas", "3800", "Vodkas");
+ArrayProductos.push(vodkas1);
+
+const vodkas2 = new Productos("Smirnoff 750ml", "Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta", "2500", "Vodkas");
+ArrayProductos.push(vodkas2);
+
+//AGREGAR TODOS LOS PRODUCTOS
+
+
+
 
 //OPCION 1 
 const elegirProductos = () => {
