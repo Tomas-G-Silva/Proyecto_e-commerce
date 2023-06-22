@@ -1,12 +1,17 @@
 
 //DECLARACIONES ---- 
-const SALIR = 4;
+const SALIR = 5;
+const ATRAS = 4;
 const ArrayProductos = [];
+const ArrayCarrito = [];
+let idGlobal = 1;
 
 
-//OBEJTOS
-class Productos{
-    constructor(nombre, descripcion, precio, categoria){
+
+//CONSTRUCT
+class Productos {
+    constructor(id, nombre, descripcion, precio, categoria) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -14,46 +19,50 @@ class Productos{
     }
 }
 //Espumantes
-const espumante1 = new Productos("Deseado Rose", "Espumante rojo cereza muy atractivo, brillante y de finas burbujas", "$1600", "Espumantes");
+const espumante1 = new Productos(idGlobal++, "Deseado Rose", "Espumante rojo cereza muy atractivo, brillante y de finas burbujas", 1600, "Espumantes");
 ArrayProductos.push(espumante1);
 
-const espumante2 = new Productos("Navarro Correas Extra Brut", "De color amarillo pálido verdoso. Aromas frescos afrutados y florales", "$2500", "Espumantes");
+const espumante2 = new Productos(idGlobal++, "Navarro Correas Extra Brut", "De color amarillo pálido verdoso. Aromas frescos afrutados y florales", 2500, "Espumantes");
 ArrayProductos.push(espumante2);
 
-const espumante3 = new Productos("Federico de Alvear", "Límpido, de color verde muy tenue, con un perlage persistente de gran calidad", "$1100", "Espumantes");
+const espumante3 = new Productos(idGlobal++, "Federico de Alvear", "Límpido, de color verde muy tenue, con un perlage persistente de gran calidad", 1100, "Espumantes");
 ArrayProductos.push(espumante3);
 
 //Vodkas
-const vodkas1 = new Productos("Absolute 750ml", "Suave y maduro con el carácter distintivo del grano de trigo, seguido de un toque a frutas secas", "$3800", "Vodkas");
+const vodkas1 = new Productos(idGlobal++, "Absolute 750ml", "Suave y maduro con el carácter distintivo del grano de trigo, seguido de un toque a frutas secas", 3800, "Vodkas");
 ArrayProductos.push(vodkas1);
 
-const vodkas2 = new Productos("Smirnoff 750ml", "Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta", "$2500", "Vodkas");
+const vodkas2 = new Productos(idGlobal++, "Smirnoff 750ml", "Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta", 2500, "Vodkas");
 ArrayProductos.push(vodkas2);
 
-const vodkas3 = new Productos("Sky 750ml", "Presenta un aspecto muy brillante, límpido y cristalino con un un sabor suave de leve amargor", "$2450", "Vodkas");
+const vodkas3 = new Productos(idGlobal++, "Sky 750ml", "Presenta un aspecto muy brillante, límpido y cristalino con un un sabor suave de leve amargor", 2450, "Vodkas");
 ArrayProductos.push(vodkas3);
 
 //Rones
-const rones1 = new Productos("Bacardi Blanco", "Ron ligero y aromáticamente equilibrado", "$3200", "Rones");
+const rones1 = new Productos(idGlobal++, "Bacardi Blanco", "Ron ligero y aromáticamente equilibrado", 3200, "Rones");
 ArrayProductos.push(rones1);
 
-const rones2 = new Productos("Bacardi Dorado", "Es el primer ron dorado ligero del mundo. Se envejece en barricas de roble blanco tostado al fuego para darle carácter", "$3350", "Rones");
+const rones2 = new Productos(idGlobal++, "Bacardi Dorado", "Es el primer ron dorado ligero del mundo. Se envejece en barricas de roble blanco tostado al fuego para darle carácter", 3350, "Rones");
 ArrayProductos.push(rones2);
 
-const rones3 = new Productos("Havana Club", "Es considerado la transición entre los Rones Blancos y los Oscuros", "$2100", "Rones");
+const rones3 = new Productos(idGlobal++, "Havana Club", "Es considerado la transición entre los Rones Blancos y los Oscuros", 2100, "Rones");
 ArrayProductos.push(rones3);
 
 
+
 //FILTROS
- const mostrarProductosCategoria = (categoria) =>{
-    const filtrado = ArrayProductos.filter((el)=> el.categoria == categoria);
+const mostrarProductosCategoria = (categoria) => {
+    const filtrado = ArrayProductos.filter((el) => el.categoria == categoria);
     let mensaje = "";
-    
-    filtrado.forEach((el)=> {
-     mensaje += "\nProdcuto: " + el.nombre + "\nDescripción: " + el.descripcion + "\nPrecio: " + el.precio
-    })
-    alert(mensaje)
- }
+
+    filtrado.forEach((el) => {
+        mensaje += "\n" + el.id + "-Prodcuto: " + el.nombre + "\nDescripción: " + el.descripcion + "\nPrecio: $" + el.precio + "\n"
+    });
+
+    const id = parseInt(prompt(mensaje + "\n" + "Ingrese el numero del producto para agregarlo al carrito"));
+    const productoEncontrado = ArrayProductos.find(el => el.id === id);
+    ArrayCarrito.push(productoEncontrado);
+}
 
 
 
@@ -61,7 +70,7 @@ ArrayProductos.push(rones3);
 const elegirProductos = () => {
     let menu
     menu = parseInt(prompt(" Selecciona una opción: \n 1-Espumantes \n 2-Vodkas \n 3-Rones \n 4-Volver al menu principal"));
-    while (menu !== SALIR) {
+    while (menu !== ATRAS) {
         switch (menu) {
             case 1: mostrarProductosCategoria("Espumantes");
                 break;
@@ -109,13 +118,26 @@ const calcularEnvio = () => {
     }
 }
 
+//OPCION 4
+const verCarrito = () => {
+    let mensaje = "Mi Carrito 🛒 \n";
 
+    ArrayCarrito.forEach((el) => {
+        mensaje += "\n" + "Prodcuto: " + el.nombre + "\nPrecio: $" + el.precio + "\n"
+    });
+
+    //SUMA de carrito
+    const total = ArrayCarrito.reduce((acumulador, el) => acumulador + el.precio, 0);
+
+    mensaje += "\nEl total es $" + total;
+    alert(mensaje);
+}
 
 
 let edad = parseInt(prompt("Hola, Bienvenido.\n Por favor, ingresa tu edad"))
 if (edad >= 18) {
 
-    let menu = parseInt(prompt("Por favor selecciona una opción: \n 1-Elegir productos \n 2-Calcular descuentos \n 3-Calcular envio \n 4-Salir"));
+    let menu = parseInt(prompt("Por favor selecciona una opción: \n 1-Elegir Productos \n 2-Calcular Descuentos \n 3-Calcular Envio \n 4-Ver Carrito \n 5-Salir"));
 
     while (menu !== SALIR) {
 
@@ -126,12 +148,14 @@ if (edad >= 18) {
                 break;
             case 3: calcularEnvio();
                 break;
+            case 4: verCarrito();
+                break;
             default:
                 alert("Ingreso una opcion invalida, por favor ingrese una de las opciones que se muestran en pantalla");
                 break;
         }
 
-        menu = parseInt(prompt("Selecciona una opción: \n 1-Elegir productos \n 2-Calcular descuentos \n 3-Calcular envio \n 4-Salir"));
+        menu = parseInt(prompt("Selecciona una opción: \n 1-Elegir productos \n 2-Calcular descuentos \n 3-Calcular envio \n 4-Ver Carrito \n 5-Salir"));
     }
 
     alert("Gracias por su compra, vuelva pronto 😁")
